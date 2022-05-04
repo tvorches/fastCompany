@@ -8,8 +8,8 @@ const SearchStatus = ({ length }) => {
             return "Человек тусанет";
         }
         if (lastOne === 1) return "Человек тусанет";
-        if ([2, 3, 4].indexOf(lastOne) >= 0) return "Человека тусанут";
-        return "Человек тусанет";
+        if ([2, 3, 4].indexOf(lastOne) >= 0) return "человека тусанут";
+        return "человек тусанет";
     };
     return (
         <h2>
@@ -24,7 +24,7 @@ const SearchStatus = ({ length }) => {
     );
 };
 SearchStatus.propTypes = {
-    length: PropTypes.number.isRequired
+    length: PropTypes.number
 };
 
 export default SearchStatus;
