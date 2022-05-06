@@ -5,23 +5,27 @@ import api from "../api";
 import PropTypes from "prop-types";
 import GroupList from "./groupList";
 import SearchStatus from "./searchStatus";
+import UserPage from "./userPage";
 import UsersTable from "./usersTable";
 import _ from "lodash";
 
-const Users = () => {
+const Users = ({ match }) => {
     const [professionsObject, setProfession] = useState();
     const [currentPage, setCurrentPage] = useState(1);
     const [selectedProf, setSelectedProf] = useState();
     const [sortBy, setSortBy] = useState({ iter: "name", order: "asc" });
     const pageSize = 8;
-
+    
+    const userId = match.params.userId;
     const [users, setUsers] = useState([]);
     useEffect(() => {
         api.users.default.fetchAll().then((data) => setUsers(data));
     }, []);
+
     const handleDelete = (userId) => {
         setUsers(users.filter((user) => user._id !== userId));
     };
+
     const handleToggleBookMark = (id) => {
         setUsers(
             users.map((user) => {
@@ -55,10 +59,10 @@ const Users = () => {
     if (users) {
         const filteredUsers = selectedProf
             ? users.filter(
-                  (user) =>
-                      JSON.stringify(user.profession) ===
-                      JSON.stringify(selectedProf)
-              )
+                (user) =>
+                    JSON.stringify(user.profession) ===
+                    JSON.stringify(selectedProf)
+            )
             : users;
 
         const count = filteredUsers.length;
@@ -71,24 +75,28 @@ const Users = () => {
         const clearFilter = () => {
             setSelectedProf();
         };
-        return (
+        return userId ? (
+            <UserPage userId={userId} />
+        ) : (
             <div className="d-flex">
                 {professionsObject && (
-                    <div className="d-flex flex-column flex-shrink-0 p-3">
+                    <div className="d-flex flex-column flex-shrink-0 p-2">
                         <GroupList
-                            selectedItem={selectedProf}
                             items={professionsObject}
                             onItemSelect={handleProfessionSelect}
+                            selectedItem={selectedProf}
                         />
                         <button
                             className="btn btn-secondary mt-2"
                             onClick={clearFilter}
                         >
+                            {" "}
                             Очистить
                         </button>
                     </div>
                 )}
-                <div className="d-flex flex-column">
+
+                <div className="d-flex flex-column p-2">
                     <SearchStatus length={count} />
                     {count > 0 && (
                         <UsersTable
@@ -111,7 +119,7 @@ const Users = () => {
             </div>
         );
     }
-    return "loading.....";
+    return "loading...";
 };
 Users.propTypes = {
     users: PropTypes.array
