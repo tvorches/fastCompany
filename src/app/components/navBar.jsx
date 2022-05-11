@@ -1,29 +1,47 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 const NavBar = () => {
     return (
         <ul className="nav">
             <li className="nav-item">
-                <Link
-                    className="nav-link active"
+                <NavLink
+                    className={(isActive) =>
+                        "nav-link" + (!isActive ? " unselected" : "")
+                    }
                     aria-current="page"
-                    to="/main"
+                    to="/"
                 >
                     Main
-                </Link>
+                </NavLink>
             </li>
             <li className="nav-item">
-                <Link className="nav-link" to="/login">
+                <NavLink
+                    className={(isActive) =>
+                        "nav-link" + (!isActive ? " unselected" : "")
+                    }
+                    to="/login"
+                >
                     Login
-                </Link>
+                </NavLink>
             </li>
             <li className="nav-item">
-                <Link className="nav-link" to="/users">
+                <NavLink
+                    className={(isActive) =>
+                        "nav-link" + (!isActive ? " unselected" : "")
+                    }
+                    to="/users"
+                >
                     Users
-                </Link>
+                </NavLink>
             </li>
         </ul>
     );
 };
 
 export default NavBar;
+<NavLink
+    to="/faq"
+    className={(isActive) => "nav-link" + (!isActive ? " unselected" : "")}
+>
+    FAQs
+</NavLink>;

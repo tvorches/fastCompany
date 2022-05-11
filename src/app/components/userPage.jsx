@@ -9,7 +9,6 @@ const UserPage = ({ userId }) => {
     const [user, setUser] = useState();
     useEffect(() => {
         api.users.default.getById(userId).then((data) => setUser(data));
-        console.log(user);
     });
     const handleClick = () => {
         history.push("/users");
@@ -26,7 +25,7 @@ const UserPage = ({ userId }) => {
             </div>
         );
     } else {
-        return <h1>Loading</h1>;
+        return <h1>Loading....</h1>;
     }
 };
 
