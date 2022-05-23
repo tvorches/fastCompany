@@ -1,11 +1,4 @@
 import React, { useState } from "react";
-
-const styles = {
-    icons: {
-        cursor: "pointer"
-    }
-};
-
 const BookMark = () => {
     const [mark, setMark] = useState(false);
 

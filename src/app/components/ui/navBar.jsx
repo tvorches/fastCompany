@@ -5,6 +5,7 @@ const NavBar = () => {
         <ul className="nav">
             <li className="nav-item">
                 <NavLink
+                    exact
                     className={(isActive) =>
                         "nav-link" + (!isActive ? " unselected" : "")
                     }
@@ -39,9 +40,3 @@ const NavBar = () => {
 };
 
 export default NavBar;
-<NavLink
-    to="/faq"
-    className={(isActive) => "nav-link" + (!isActive ? " unselected" : "")}
->
-    FAQs
-</NavLink>;
